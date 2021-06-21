@@ -1,0 +1,34 @@
+debug: false
+
+ldap:
+  userDnPattern: cn={0}, ou=Users
+  groupSearchBase: ou=Groups
+  groupSearchFilter: (uniqueMember={0})
+  
+management:
+  endpoints:
+    web:
+      exposure.include: beans, env, health, info, metrics, mappings
+  endpoint:
+    health:
+      showDetails: always
+      
+server:
+  port: 8100
+
+spring:
+  application:
+    name: bootsvc
+  ldap:
+    urls: ${LDAP_URL}
+    base: ${LDAP_BASE}
+    username: ${LDAP_USER}
+    password: ${LDAP_PASSWORD}
+    anonymousReadOnly: true
+    
+    
+springdoc:
+  show-actuator: true
+  packagesToScan: org.dsc.ese.bootsvc
+  swagger-ui:
+    groups-order: DESC
